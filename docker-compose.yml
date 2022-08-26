@@ -34,6 +34,19 @@ services:
     #  - 15005:5005
     command: ["--init"]
     # command: ["/ofbiz-framework/gradlew", "ofbiz --status"]
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    enviroment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin@serinty.net
+      - PGADMIN_DEFAULT_PASSWORD=initpw4sec!
+      - PGADMIN_CONFIG_DEFAULT_SERVER=0.0.0.0
+    depends:on:
+      - db
+    ports:
+      - 5050:80
+    volumes:
+      - pgadminwork:/var/lib/pgadmin
 
 volumes:
   ofbizpostgresbackup:
@@ -41,3 +54,4 @@ volumes:
   ofbizdata:
   ofbizdbconf:
   ofbizsecconf:
+  pgadminwork:
